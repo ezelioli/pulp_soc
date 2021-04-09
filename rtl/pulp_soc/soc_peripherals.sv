@@ -254,8 +254,8 @@ module soc_peripherals
     hyper_to_pad_t              s_hyper_to_pad;
     pad_to_hyper_t              s_pad_to_hyper;
 
-    assign uart_tx[0]                 = s_uart_to_pad.tx_o;
-    assign s_pad_to_uart.rx_i         = uart_rx[0];
+    assign uart_tx[0]                 = s_uart_to_pad[0].tx_o;
+    assign s_pad_to_uart[0].rx_i      = uart_rx[0];
 
     assign i2c_scl_o[0]               = s_i2c_to_pad[0].scl_o;
     assign i2c_sda_o[0]               = s_i2c_to_pad[0].sda_o;
@@ -273,24 +273,24 @@ module soc_peripherals
     assign s_pad_to_i2c[1].scl_i      = i2c_scl_i[1];
     assign s_pad_to_i2c[1].sda_i      = i2c_sda_i[1];
 
-    assign spi_clk_o                  = s_qspi_to_pad.sck_o;
-    assign spi_csn_o[0]               = s_qspi_to_pad.csn0_o;
-    assign spi_csn_o[1]               = s_qspi_to_pad.csn1_o;
-    assign spi_csn_o[2]               = s_qspi_to_pad.csn2_o;
-    assign spi_csn_o[3]               = s_qspi_to_pad.csn3_o;
-    assign spi_oen_o[0]               = s_qspi_to_pad.sd0_oe;
-    assign spi_oen_o[1]               = s_qspi_to_pad.sd1_oe;
-    assign spi_oen_o[2]               = s_qspi_to_pad.sd2_oe;
-    assign spi_oen_o[3]               = s_qspi_to_pad.sd3_oe;
-    assign spi_sdo_o[0]               = s_qspi_to_pad.sd0_o;
-    assign spi_sdo_o[1]               = s_qspi_to_pad.sd1_o;
-    assign spi_sdo_o[2]               = s_qspi_to_pad.sd2_o;
-    assign spi_sdo_o[3]               = s_qspi_to_pad.sd3_o;
+    assign spi_clk_o[0]               = s_qspi_to_pad[0].sck_o;
+    assign spi_csn_o[0][0]            = s_qspi_to_pad[0].csn0_o;
+    assign spi_csn_o[0][1]            = s_qspi_to_pad[0].csn1_o;
+    assign spi_csn_o[0][2]            = s_qspi_to_pad[0].csn2_o;
+    assign spi_csn_o[0][3]            = s_qspi_to_pad[0].csn3_o;
+    assign spi_oen_o[0][0]            = s_qspi_to_pad[0].sd0_oe;
+    assign spi_oen_o[0][1]            = s_qspi_to_pad[0].sd1_oe;
+    assign spi_oen_o[0][2]            = s_qspi_to_pad[0].sd2_oe;
+    assign spi_oen_o[0][3]            = s_qspi_to_pad[0].sd3_oe;
+    assign spi_sdo_o[0][0]            = s_qspi_to_pad[0].sd0_o;
+    assign spi_sdo_o[0][1]            = s_qspi_to_pad[0].sd1_o;
+    assign spi_sdo_o[0][2]            = s_qspi_to_pad[0].sd2_o;
+    assign spi_sdo_o[0][3]            = s_qspi_to_pad[0].sd3_o;
 
-    assign s_pad_to_qspi.sd0_i        = spi_sdi_i[0];
-    assign s_pad_to_qspi.sd1_i        = spi_sdi_i[1];
-    assign s_pad_to_qspi.sd2_i        = spi_sdi_i[2];
-    assign s_pad_to_qspi.sd3_i        = spi_sdi_i[3];
+    assign s_pad_to_qspi[0].sd0_i     = spi_sdi_i[0][0];
+    assign s_pad_to_qspi[0].sd1_i     = spi_sdi_i[0][1];
+    assign s_pad_to_qspi[0].sd2_i     = spi_sdi_i[0][2];
+    assign s_pad_to_qspi[0].sd3_i     = spi_sdi_i[0][3];
 
     assign s_pad_to_cpi.pclk_i        = cam_clk_i    ;
     assign s_pad_to_cpi.hsync_i       = cam_hsync_i  ;

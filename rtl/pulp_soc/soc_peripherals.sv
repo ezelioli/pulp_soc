@@ -12,13 +12,10 @@
 
 module soc_peripherals 
     import uart_pkg::*;
-    import i2c_pkg::i2c_to_pad_t;
-    import i2c_pkg::pad_to_i2c_t;
-    import qspi_pkg::pad_to_qspi_t;
-    import qspi_pkg::qspi_to_pad_t;
-    import cpi_pkg::pad_to_cpi_t;
-    import dvsi_pkg::dvsi_to_pad_t;
-    import dvsi_pkg::pad_to_dvsi_t;
+    import i2c_pkg::*;
+    import qspi_pkg::*;
+    import cpi_pkg::*;
+    import dvsi_pkg::*;
     import hyper_pkg::*;
 #(
     parameter MEM_ADDR_WIDTH = 13,
@@ -33,7 +30,7 @@ module soc_peripherals
     parameter NBIT_PADMUX    = 2,
     parameter N_UART         = 1,
     parameter N_SPI          = 1,
-    parameter N_I2C          = 2
+    parameter N_I2C          = 2  
 ) (
     input  logic                       clk_i,
     input  logic                       periph_clk_i,
@@ -103,8 +100,8 @@ module soc_peripherals
     output logic [3:0]                 timer_ch3_o,
 
     //CAMERA
-    input  logic                       cam_clk_i,
-    input  logic [7:0]                 cam_data_i,
+    input  logic                       cam_clk_i  ,
+    input  logic [7:0]                 cam_data_i ,
     input  logic                       cam_hsync_i,
     input  logic                       cam_vsync_i,
 
@@ -116,11 +113,11 @@ module soc_peripherals
 
 
     //I2C
-    input  logic [N_I2C-1:0]           i2c_scl_i,
-    output logic [N_I2C-1:0]           i2c_scl_o,
+    input  logic [N_I2C-1:0]           i2c_scl_i   ,
+    output logic [N_I2C-1:0]           i2c_scl_o   ,
     output logic [N_I2C-1:0]           i2c_scl_oe_o,
-    input  logic [N_I2C-1:0]           i2c_sda_i,
-    output logic [N_I2C-1:0]           i2c_sda_o,
+    input  logic [N_I2C-1:0]           i2c_sda_i   ,
+    output logic [N_I2C-1:0]           i2c_sda_o   ,
     output logic [N_I2C-1:0]           i2c_sda_oe_o,
 
     //I2S
@@ -149,39 +146,39 @@ module soc_peripherals
     input  logic                 [3:0] sddata_i,
     output logic                 [3:0] sddata_oen_o,
 
-    /* DVSI */
-    output logic                             dvsi_asa_o       ,  
-    output logic                             dvsi_are_o       ,  
-    output logic                             dvsi_asy_o       ,  
-    output logic                             dvsi_ynrst_o     ,  
-    output logic                             dvsi_yclk_o      ,  
-    output logic                             dvsi_sxy_o       ,  
-    output logic                             dvsi_xclk_o      ,  
-    output logic                             dvsi_xnrst_o     ,  
-    output logic                             dvsi_cfg0_o      ,  
-    output logic                             dvsi_cfg1_o      ,  
-    output logic                             dvsi_cfg2_o      ,  
-    output logic                             dvsi_cfg3_o      ,  
-    output logic                             dvsi_cfg4_o      ,  
-    output logic                             dvsi_cfg5_o      ,  
-    output logic                             dvsi_cfg6_o      ,  
-    output logic                             dvsi_cfg7_o      ,  
-    input  logic                             dvsi_xydata0_i   ,
-    input  logic                             dvsi_xydata1_i   ,
-    input  logic                             dvsi_xydata2_i   ,
-    input  logic                             dvsi_xydata3_i   ,
-    input  logic                             dvsi_xydata4_i   ,
-    input  logic                             dvsi_xydata5_i   ,
-    input  logic                             dvsi_xydata6_i   ,
-    input  logic                             dvsi_xydata7_i   ,
-    input  logic                             dvsi_on0_i       ,
-    input  logic                             dvsi_on1_i       ,
-    input  logic                             dvsi_on2_i       ,
-    input  logic                             dvsi_on3_i       ,
-    input  logic                             dvsi_off0_i      ,
-    input  logic                             dvsi_off1_i      ,
-    input  logic                             dvsi_off2_i      ,
-    input  logic                             dvsi_off3_i      ,
+    // DVSI
+    output logic                       dvsi_asa_o       ,  
+    output logic                       dvsi_are_o       ,  
+    output logic                       dvsi_asy_o       ,  
+    output logic                       dvsi_ynrst_o     ,  
+    output logic                       dvsi_yclk_o      ,  
+    output logic                       dvsi_sxy_o       ,  
+    output logic                       dvsi_xclk_o      ,  
+    output logic                       dvsi_xnrst_o     ,  
+    output logic                       dvsi_cfg0_o      ,  
+    output logic                       dvsi_cfg1_o      ,  
+    output logic                       dvsi_cfg2_o      ,  
+    output logic                       dvsi_cfg3_o      ,  
+    output logic                       dvsi_cfg4_o      ,  
+    output logic                       dvsi_cfg5_o      ,  
+    output logic                       dvsi_cfg6_o      ,  
+    output logic                       dvsi_cfg7_o      ,  
+    input  logic                       dvsi_xydata0_i   ,
+    input  logic                       dvsi_xydata1_i   ,
+    input  logic                       dvsi_xydata2_i   ,
+    input  logic                       dvsi_xydata3_i   ,
+    input  logic                       dvsi_xydata4_i   ,
+    input  logic                       dvsi_xydata5_i   ,
+    input  logic                       dvsi_xydata6_i   ,
+    input  logic                       dvsi_xydata7_i   ,
+    input  logic                       dvsi_on0_i       ,
+    input  logic                       dvsi_on1_i       ,
+    input  logic                       dvsi_on2_i       ,
+    input  logic                       dvsi_on3_i       ,
+    input  logic                       dvsi_off0_i      ,
+    input  logic                       dvsi_off1_i      ,
+    input  logic                       dvsi_off2_i      ,
+    input  logic                       dvsi_off3_i      ,
 
 
     output logic [EVNT_WIDTH-1:0]      cl_event_data_o,
@@ -239,24 +236,109 @@ module soc_peripherals
     logic s_timer_in_lo_event;
     logic s_timer_in_hi_event;
 
-    uart_to_pad_t s_uart_to_pad = {uart_tx, 1'b1};  /// UART_TX_OE ?? //
-    pad_to_uart_t s_pad_to_uart = {uart_rx};
+    // UART == 1
+    uart_to_pad_t  [N_UART-1:0] s_uart_to_pad;
+    pad_to_uart_t  [N_UART-1:0] s_pad_to_uart;
+    // I2C == 2
+    i2c_to_pad_t    [N_I2C-1:0] s_i2c_to_pad;
+    pad_to_i2c_t    [N_I2C-1:0] s_pad_to_i2c;
+    // QSPI == 1
+    qspi_to_pad_t   [N_SPI-1:0] s_qspi_to_pad;
+    pad_to_qspi_t   [N_SPI-1:0] s_pad_to_qspi;
+    // CPI == 1
+    pad_to_cpi_t                s_pad_to_cpi;
+    // DVSI == 1
+    dvsi_to_pad_t               s_dvsi_to_pad;
+    pad_to_dvsi_t               s_pad_to_dvsi;
+    // HYPER == 0
+    hyper_to_pad_t              s_hyper_to_pad;
+    pad_to_hyper_t              s_pad_to_hyper;
 
-    i2c_to_pad_t s_i2c_to_pad   = {i2c_sda_o, i2c_sda_oe_o, i2c_scl_o, i2c_scl_oe_o};
-    pad_to_i2c_t s_pad_to_i2c   = {i2c_sda_i, i2c_scl_i};
+    assign uart_tx[0]                 = s_uart_to_pad.tx_o;
+    assign s_pad_to_uart.rx_i         = uart_rx[0];
 
-    qspi_to_pad_t s_qspi_to_pad = {spi_sdo_o[0], spi_oen_o[0], spi_sdo_o[1], spi_oen_o[1], spi_sdo_o[2], spi_oen_o[2], spi_sdo_o[3], spi_oen_o[3], spi_clk_o};
-    pad_to_qspi_t s_pad_to_qspi = {spi_sdi[0], spi_sdi[1], spi_sdi[2], spi_sdi[3]};
+    assign i2c_scl_o[0]               = s_i2c_to_pad[0].scl_o;
+    assign i2c_sda_o[0]               = s_i2c_to_pad[0].sda_o;
+    assign i2c_scl_oe_o[0]            = s_i2c_to_pad[0].scl_oe;
+    assign i2c_sda_oe_o[0]            = s_i2c_to_pad[0].sda_oe;
 
-    pad_to_cpi_t s_pad_to_cpi   = {cam_clk_i, cam_hsync_i, cam_vsync_i, cam_data_i};
+    assign s_pad_to_i2c[0].scl_i      = i2c_scl_i[0];
+    assign s_pad_to_i2c[0].sda_i      = i2c_sda_i[0];
 
-    dvsi_to_pad_t s_dvsi_to_pad = {dvsi_asa_o, dvsi_are_o, dvsi_asy_o, dvsi_ynrst_o, dvsi_yclk_o. dvsi_sxy_o, dvsi_xclk_o, dvsi_xnrst_o,
-                                   dvsi_cfg0_o, dvsi_cfg1_o, dvsi_cfg2_o, dvsi_cfg3_o, dvsi_cfg4_o, dvsi_cfg5_o, dvsi_cfg6_o, dvsi_cfg7_o};
-    pad_to_dvsi_t s_pad_to_dvsi = {dvsi_xydata0_i, dvsi_xydata1_i, dvsi_xydata2_i, dvsi_xydata3_i, dvsi_xydata4_i, dvsi_xydata5_i, dvsi_xydata6_i, dvsi_xydata7_i,
-                                   dvsi_on0_i, dvsi_on1_i, dvsi_on2_i, dvsi_on3_i, dvsi_off0_i, dvsi_off1_i, dvsi_off2_i, dvsi_off3_i};
+    assign i2c_scl_o[1]               = s_i2c_to_pad[1].scl_o;
+    assign i2c_sda_o[1]               = s_i2c_to_pad[1].sda_o;
+    assign i2c_scl_oe_o[1]            = s_i2c_to_pad[1].scl_oe;
+    assign i2c_sda_oe_o[1]            = s_i2c_to_pad[1].sda_oe;
 
-    hyper_to_pad_t s_hyper_to_pad = {};
-    pad_to_hyper_t s_pad_to_hyper = {};
+    assign s_pad_to_i2c[1].scl_i      = i2c_scl_i[1];
+    assign s_pad_to_i2c[1].sda_i      = i2c_sda_i[1];
+
+    assign spi_clk_o                  = s_qspi_to_pad.sck_o;
+    assign spi_csn_o[0]               = s_qspi_to_pad.csn0_o;
+    assign spi_csn_o[1]               = s_qspi_to_pad.csn1_o;
+    assign spi_csn_o[2]               = s_qspi_to_pad.csn2_o;
+    assign spi_csn_o[3]               = s_qspi_to_pad.csn3_o;
+    assign spi_oen_o[0]               = s_qspi_to_pad.sd0_oe;
+    assign spi_oen_o[1]               = s_qspi_to_pad.sd1_oe;
+    assign spi_oen_o[2]               = s_qspi_to_pad.sd2_oe;
+    assign spi_oen_o[3]               = s_qspi_to_pad.sd3_oe;
+    assign spi_sdo_o[0]               = s_qspi_to_pad.sd0_o;
+    assign spi_sdo_o[1]               = s_qspi_to_pad.sd1_o;
+    assign spi_sdo_o[2]               = s_qspi_to_pad.sd2_o;
+    assign spi_sdo_o[3]               = s_qspi_to_pad.sd3_o;
+
+    assign s_pad_to_qspi.sd0_i        = spi_sdi_i[0];
+    assign s_pad_to_qspi.sd1_i        = spi_sdi_i[1];
+    assign s_pad_to_qspi.sd2_i        = spi_sdi_i[2];
+    assign s_pad_to_qspi.sd3_i        = spi_sdi_i[3];
+
+    assign s_pad_to_cpi.pclk_i        = cam_clk_i    ;
+    assign s_pad_to_cpi.hsync_i       = cam_hsync_i  ;
+    assign s_pad_to_cpi.vsync_i       = cam_vsync_i  ;
+    assign s_pad_to_cpi.data0_i       = cam_data_i[0];
+    assign s_pad_to_cpi.data1_i       = cam_data_i[1];
+    assign s_pad_to_cpi.data2_i       = cam_data_i[2];
+    assign s_pad_to_cpi.data3_i       = cam_data_i[3];
+    assign s_pad_to_cpi.data4_i       = cam_data_i[4];
+    assign s_pad_to_cpi.data5_i       = cam_data_i[5];
+    assign s_pad_to_cpi.data6_i       = cam_data_i[6];
+    assign s_pad_to_cpi.data7_i       = cam_data_i[7];
+
+    assign dvsi_asa_o                 = s_dvsi_to_pad.asa_o;
+    assign dvsi_are_o                 = s_dvsi_to_pad.are_o;
+    assign dvsi_asy_o                 = s_dvsi_to_pad.asy_o;
+    assign dvsi_ynrst_o               = s_dvsi_to_pad.ynrst_o;
+    assign dvsi_yclk_o                = s_dvsi_to_pad.yclk_o;
+    assign dvsi_sxy_o                 = s_dvsi_to_pad.sxy_o;
+    assign dvsi_xclk_o                = s_dvsi_to_pad.xclk_o;
+    assign dvsi_xnrst_o               = s_dvsi_to_pad.xnrst_o;
+    assign dvsi_cfg0_o                = s_dvsi_to_pad.cfg0_o;
+    assign dvsi_cfg1_o                = s_dvsi_to_pad.cfg1_o;
+    assign dvsi_cfg7_o                = s_dvsi_to_pad.cfg2_o;
+    assign dvsi_cfg2_o                = s_dvsi_to_pad.cfg3_o;
+    assign dvsi_cfg3_o                = s_dvsi_to_pad.cfg4_o;
+    assign dvsi_cfg4_o                = s_dvsi_to_pad.cfg5_o;
+    assign dvsi_cfg5_o                = s_dvsi_to_pad.cfg6_o;
+    assign dvsi_cfg6_o                = s_dvsi_to_pad.cfg7_o;
+
+    assign s_pad_to_dvsi.xydata0_i    = dvsi_xydata0_i;
+    assign s_pad_to_dvsi.xydata1_i    = dvsi_xydata1_i;
+    assign s_pad_to_dvsi.xydata2_i    = dvsi_xydata2_i;
+    assign s_pad_to_dvsi.xydata3_i    = dvsi_xydata3_i;
+    assign s_pad_to_dvsi.xydata4_i    = dvsi_xydata4_i;
+    assign s_pad_to_dvsi.xydata5_i    = dvsi_xydata5_i;
+    assign s_pad_to_dvsi.xydata6_i    = dvsi_xydata6_i;
+    assign s_pad_to_dvsi.xydata7_i    = dvsi_xydata7_i;
+    assign s_pad_to_dvsi.on0_i        = dvsi_on0_i    ;
+    assign s_pad_to_dvsi.on1_i        = dvsi_on1_i    ;
+    assign s_pad_to_dvsi.on2_i        = dvsi_on2_i    ;
+    assign s_pad_to_dvsi.on3_i        = dvsi_on3_i    ;
+    assign s_pad_to_dvsi.off0_i       = dvsi_off0_i   ;
+    assign s_pad_to_dvsi.off1_i       = dvsi_off1_i   ;
+    assign s_pad_to_dvsi.off2_i       = dvsi_off2_i   ;
+    assign s_pad_to_dvsi.off3_i       = dvsi_off3_i   ;
+
+
 
     assign s_events[UDMA_EVENTS-1:0]  = s_udma_events;
     assign s_events[135]              = s_adv_timer_events[0];
@@ -445,94 +527,6 @@ module soc_peripherals
     // ╚██████╔╝██████╔╝██║ ╚═╝ ██║██║  ██║    ███████║╚██████╔╝██████╔╝███████║   ██║   ███████║ //
     //  ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝    ╚══════╝ ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝   ╚══════╝ //
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    /*
-    udma_subsystem #(
-        .APB_ADDR_WIDTH     ( APB_ADDR_WIDTH       ),
-        .L2_ADDR_WIDTH      ( MEM_ADDR_WIDTH       ),
-        .N_SPI (N_SPI),
-        .N_UART(N_UART),
-        .N_I2C (N_I2C)
-    ) i_udma (
-        .L2_ro_req_o      ( l2_tx_master.req     ),
-        .L2_ro_gnt_i      ( l2_tx_master.gnt     ),
-        .L2_ro_wen_o      ( l2_tx_master.wen     ),
-        .L2_ro_addr_o     ( l2_tx_master.add     ),
-        .L2_ro_wdata_o    ( l2_tx_master.wdata   ),
-        .L2_ro_be_o       ( l2_tx_master.be      ),
-        .L2_ro_rdata_i    ( l2_tx_master.r_rdata ),
-        .L2_ro_rvalid_i   ( l2_tx_master.r_valid ),
-
-        .L2_wo_req_o      ( l2_rx_master.req     ),
-        .L2_wo_gnt_i      ( l2_rx_master.gnt     ),
-        .L2_wo_wen_o      ( l2_rx_master.wen     ),
-        .L2_wo_addr_o     ( l2_rx_master.add     ),
-        .L2_wo_wdata_o    ( l2_rx_master.wdata   ),
-        .L2_wo_be_o       ( l2_rx_master.be      ),
-        .L2_wo_rdata_i    ( l2_rx_master.r_rdata ),
-        .L2_wo_rvalid_i   ( l2_rx_master.r_valid ),
-
-        .dft_test_mode_i  ( dft_test_mode_i      ),
-        .dft_cg_enable_i  ( 1'b0                 ),
-
-        .sys_clk_i        ( clk_i                ),
-        .periph_clk_i     ( periph_clk_i         ),
-        .sys_resetn_i     ( rst_ni               ),
-
-        .udma_apb_paddr   ( s_udma_bus.paddr     ),
-        .udma_apb_pwdata  ( s_udma_bus.pwdata    ),
-        .udma_apb_pwrite  ( s_udma_bus.pwrite    ),
-        .udma_apb_psel    ( s_udma_bus.psel      ),
-        .udma_apb_penable ( s_udma_bus.penable   ),
-        .udma_apb_prdata  ( s_udma_bus.prdata    ),
-        .udma_apb_pready  ( s_udma_bus.pready    ),
-        .udma_apb_pslverr ( s_udma_bus.pslverr   ),
-
-        .events_o         ( s_udma_events        ),
-
-        .event_valid_i    ( s_pr_event_valid     ),
-        .event_data_i     ( s_pr_event_data      ),
-        .event_ready_o    ( s_pr_event_ready     ),
-
-        .spi_clk          ( spi_clk_o            ),
-        .spi_csn          ( spi_csn_o            ),
-        .spi_oen          ( spi_oen_o            ),
-        .spi_sdo          ( spi_sdo_o            ),
-        .spi_sdi          ( spi_sdi_i            ),
-
-        .sdio_clk_o       ( sdclk_o              ),
-        .sdio_cmd_o       ( sdcmd_o              ),
-        .sdio_cmd_i       ( sdcmd_i              ),
-        .sdio_cmd_oen_o   ( sdcmd_oen_o          ),
-        .sdio_data_o      ( sddata_o             ),
-        .sdio_data_i      ( sddata_i             ),
-        .sdio_data_oen_o  ( sddata_oen_o         ),
-
-        .cam_clk_i        ( cam_clk_i            ),
-        .cam_data_i       ( cam_data_i           ),
-        .cam_hsync_i      ( cam_hsync_i          ),
-        .cam_vsync_i      ( cam_vsync_i          ),
-
-        .i2s_slave_sd0_i  ( i2s_slave_sd0_i      ),
-        .i2s_slave_sd1_i  ( i2s_slave_sd1_i      ),
-        .i2s_slave_ws_i   ( i2s_slave_ws_i       ),
-        .i2s_slave_ws_o   ( i2s_slave_ws_o       ),
-        .i2s_slave_ws_oe  ( i2s_slave_ws_oe      ),
-        .i2s_slave_sck_i  ( i2s_slave_sck_i      ),
-        .i2s_slave_sck_o  ( i2s_slave_sck_o      ),
-        .i2s_slave_sck_oe ( i2s_slave_sck_oe     ),
-
-        .uart_rx_i        ( uart_rx              ),
-        .uart_tx_o        ( uart_tx              ),
-
-        .i2c_scl_i        ( i2c_scl_i            ),
-        .i2c_scl_o        ( i2c_scl_o            ),
-        .i2c_scl_oe       ( i2c_scl_oe_o         ),
-        .i2c_sda_i        ( i2c_sda_i            ),
-        .i2c_sda_o        ( i2c_sda_o            ),
-        .i2c_sda_oe       ( i2c_sda_oe_o         )
-
-    );
-    */
 
     udma_subsystem #(
         .APB_ADDR_WIDTH(APB_ADDR_WIDTH)
@@ -591,10 +585,10 @@ module soc_peripherals
 
         .pad_to_cpi       ( s_pad_to_cpi         ),
 
-        .dvsi_to_pad      ( s_dvsi_to_pad        ),  /// TO BE MATCHED WITH EXTERNAL SIGNALS ///
+        .dvsi_to_pad      ( s_dvsi_to_pad        ),
         .pad_to_dvsi      ( s_pad_to_dvsi        ),
 
-        .hyper_to_pad     ( s_hyper_to_pad       ),  // WHAT IS HYPERBUS/HYPERRAM? ///
+        .hyper_to_pad     ( s_hyper_to_pad       ),
         .pad_to_hyper     ( s_pad_to_hyper       )
     );
 

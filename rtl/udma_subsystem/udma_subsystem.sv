@@ -102,23 +102,23 @@ module udma_subsystem
     input  udma_stream_rsp_t          udma_stream_rsp,
 
     //--- IO peripheral pads
-    // UART  
-    output  uart_to_pad_t [N_UART-1:0] uart_to_pad,
-    input   pad_to_uart_t [N_UART-1:0] pad_to_uart,
-    // I2C
-    output  i2c_to_pad_t  [ N_I2C-1:0] i2c_to_pad,
-    input   pad_to_i2c_t  [ N_I2C-1:0] pad_to_i2c,
-    // QSPI
-    output  qspi_to_pad_t [ N_QSPIM-1:0] qspi_to_pad,
-    input   pad_to_qspi_t [ N_QSPIM-1:0] pad_to_qspi,
-    // CPI
-    input  pad_to_cpi_t [ N_CPI-1:0] pad_to_cpi,
-    // DVSI
-    output  dvsi_to_pad_t [ N_DVSI-1:0] dvsi_to_pad,
-    input   pad_to_dvsi_t [ N_DVSI-1:0] pad_to_dvsi,
-    // HYPER
-    output  hyper_to_pad_t [ N_HYPER-1:0] hyper_to_pad,
-    input   pad_to_hyper_t [ N_HYPER-1:0] pad_to_hyper
+    // UART == 1
+    output uart_to_pad_t     [N_UART-1:0] uart_to_pad,
+    input  pad_to_uart_t     [N_UART-1:0] pad_to_uart,
+    // I2C == 2
+    output i2c_to_pad_t       [N_I2C-1:0] i2c_to_pad,
+    input  pad_to_i2c_t       [N_I2C-1:0] pad_to_i2c,
+    // QSPI == 1
+    output qspi_to_pad_t    [N_QSPIM-1:0] qspi_to_pad,
+    input  pad_to_qspi_t    [N_QSPIM-1:0] pad_to_qspi,
+    // CPI == 1
+    input  pad_to_cpi_t       [N_CPI-1:0] pad_to_cpi,
+    // DVSI == 1
+    output dvsi_to_pad_t     [N_DVSI-1:0] dvsi_to_pad,
+    input  pad_to_dvsi_t     [N_DVSI-1:0] pad_to_dvsi,
+    // HYPER == 0
+    output hyper_to_pad_t   [N_HYPER-1:0] hyper_to_pad,
+    input  pad_to_hyper_t   [N_HYPER-1:0] pad_to_hyper
                        
 );
 

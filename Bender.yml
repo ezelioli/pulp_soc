@@ -22,6 +22,7 @@ dependencies:
   apb_gpio:               { git: "https://github.com/pulp-platform/apb_gpio.git", rev: "0e9f142f2f11278445c953ad011fce1c7ed85b66" }
   apb_node:               { git: "https://github.com/pulp-platform/apb_node.git", version: 0.1.1 }
   apb_interrupt_cntrl:    { git: "https://github.com/pulp-platform/apb_interrupt_cntrl.git", version: 0.1.1 }
+  timer_unit:             { git: "https://github.com/pulp-platform/timer_unit.git", version: 1.0.2 }
   common_cells:           { git: "https://github.com/pulp-platform/common_cells.git", version: 1.21.0 }
   cluster_interconnect:   { git: "https://github.com/pulp-platform/cluster_interconnect.git", version: 1.1.1 }
   fpnew:                  { git: "https://github.com/pulp-platform/fpnew.git", version: 0.6.5 }

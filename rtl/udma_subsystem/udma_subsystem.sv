@@ -97,6 +97,8 @@ module udma_subsystem
     input  logic                 [7:0] event_data_i,
     output logic                       event_ready_o,
 
+    input  logic                       timer_lo_event_i,
+
     // external streams
     output udma_stream_req_t          udma_stream_req,
     input  udma_stream_rsp_t          udma_stream_rsp,
@@ -350,7 +352,8 @@ module udma_subsystem
             .events_i      ( s_trigger_events                         ),
             .dvsi_to_pad   ( dvsi_to_pad[                     g_dvsi] ),
             .pad_to_dvsi   ( pad_to_dvsi[                     g_dvsi] ),
-            .rx_ch         ( ext_ch_rx[CH_ID_EXT_RX_DVSI + g_dvsi:    CH_ID_EXT_RX_DVSI + g_dvsi] )
+            .rx_ch         ( ext_ch_rx[CH_ID_EXT_RX_DVSI + g_dvsi:    CH_ID_EXT_RX_DVSI + g_dvsi] ),
+            .saer_frame_timer_i ( timer_lo_event_i                    )
         );
         //bind DVSI events
         assign s_events[PER_ID_DVSI + g_dvsi] = s_evt_dvsi[g_dvsi];

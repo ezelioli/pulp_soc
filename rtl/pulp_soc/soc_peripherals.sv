@@ -571,6 +571,8 @@ module soc_peripherals
         .event_data_i     ( s_pr_event_data      ),
         .event_ready_o    ( s_pr_event_ready     ),
 
+        .timer_lo_event_i ( s_timer_lo_event     ),
+
         .udma_stream_req  (                      ),   /// SIGNALS NOT USED ?? ///
         .udma_stream_rsp  (                      ),
 

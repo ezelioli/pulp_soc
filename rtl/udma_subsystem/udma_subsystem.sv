@@ -353,7 +353,8 @@ module udma_subsystem
             .dvsi_to_pad   ( dvsi_to_pad[                     g_dvsi] ),
             .pad_to_dvsi   ( pad_to_dvsi[                     g_dvsi] ),
             .rx_ch         ( ext_ch_rx[CH_ID_EXT_RX_DVSI + g_dvsi:    CH_ID_EXT_RX_DVSI + g_dvsi] ),
-            .saer_frame_timer_i ( timer_lo_event_i                    )
+            .saer_frame_timer_i ( timer_lo_event_i                    ),
+            .framebuf_frame_timer_i( timer_lo_event_i                 )
         );
         //bind DVSI events
         assign s_events[PER_ID_DVSI + g_dvsi] = s_evt_dvsi[g_dvsi];
